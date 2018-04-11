@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
 import java.io.IOException;
@@ -11,6 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@Component
 public class ImageRepository {
 
     @Autowired
@@ -22,11 +24,12 @@ public class ImageRepository {
              Statement stmt = conn.createStatement();
              ResultSet rs = stmt.executeQuery("SELECT URL FROM dbo.Picture WHERE PictureID = 1")) {
             while (rs.next()) {
-                myString = rs.toString();
+                myString = rs.getString("URL");
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
+        System.out.println(myString);
         return myString;
 
     }
