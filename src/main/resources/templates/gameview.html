@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:600|Slabo+27px" rel="stylesheet"/>
     <meta charset="UTF-8"/>
     <title>Vart är vi på väg?</title>
 
@@ -9,14 +10,23 @@
 
 </head>
 <body>
+<div id="content">
+    <div id="header">
+        <h1>Vart är vi på väg?</h1>
+    </div>
 
-<div id="header">
-    <h1>Vart är vi på väg?
-    </h1>
-</div>
-
-<div id="pictureframe">
-    <img width="600" th:src="${pictureurl}"/>
+    <div id="pictureframe">
+        <img id="picture" th:src="${pictureurl}"/>
+    </div>
+    <form id="options">
+        <ul>
+        <li><input type="radio" name="answer" value="stockholm"/> Stockholm </li>
+        <li><input type="radio" name="answer" value="barcelona"/> Barcelona </li>
+        <li><input type="radio" name="answer" value="berlin"/> Berlin </li>
+        <li><input type="radio" name="answer" value="london"/> London </li>
+        </ul>
+        <p><input type="submit" value="Submit"/></p>
+    </form>
 </div>
 </body>
 </html>
