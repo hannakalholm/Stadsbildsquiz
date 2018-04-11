@@ -1,10 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link href="https://fonts.googleapis.com/css?family=Cormorant+Garamond:600|Slabo+27px" rel="stylesheet"/>
     <meta charset="UTF-8"/>
     <title>Vart är vi på väg?</title>
+
+    <link rel="stylesheet" href="/style.css"/>
+
+
 </head>
 <body>
+<div id="content">
+    <div id="header">
+        <h1>Vart är vi på väg?</h1>
+    </div>
 
     <img width="600" th:src="${pictureurl}"></img>
 
@@ -17,6 +26,10 @@
 
     <a href="/option/-1">Jag vill svara på en lägre poängnivå!</a>
 
+    <div id="pictureframe">
+        <img id="picture" th:src="${pictureurl}"/>
+    </div>
+</div>
 
 </body>
 </html>
