@@ -1,29 +1,21 @@
 package com.example.demo;
 
+import com.example.demo.domain.City;
+import com.example.demo.repository.DataRepository;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 @SpringBootApplication
 public class DemoApplication {
 
     public static void main(String[] args) {
-
+        // endast denna rad i main
         SpringApplication.run(DemoApplication.class, args);
 
-        List<String>cities = new ArrayList<>();
-        cities.add("Stockholm");
-        cities.add("Paris");
-        cities.add("Rom");
-        cities.add("London");
-        cities.add("Lissabon");
-        cities.add("Berlin");
-        cities.add("Tallinn");
-        cities.add("Barcelona");
-        cities.add("Amsterdam");
-        cities.add("Reykjavik");
-
     }
+
 }

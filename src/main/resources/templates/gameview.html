@@ -7,5 +7,16 @@
 <body>
 
     <img width="600" th:src="${pictureurl}"></img>
+
+
+    <ul>
+        <li th:each="city : ${cityList}">
+            <a th:href="@{/option/{id}(id=${city.ID})}" th:text="${city.name}" />
+        </li>
+    </ul>
+
+    <a href="/option/-1">Jag vill svara på en lägre poängnivå!</a>
+
+
 </body>
 </html>

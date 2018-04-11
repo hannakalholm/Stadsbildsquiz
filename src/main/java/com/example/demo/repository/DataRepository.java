@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -13,7 +15,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class ImageRepository {
+public class DataRepository {
 
     @Autowired
     private DataSource dataSource;
@@ -33,4 +35,19 @@ public class ImageRepository {
         return myString;
 
     }
+
+    public List<String> getAllCities() {
+        List<String> res = new ArrayList<>();
+        try (Connection conn = dataSource.getConnection();
+             Statement stmt = conn.createStatement();
+             ResultSet rs = stmt.executeQuery("SELECT Cityname FROM dbo.City ORDER BY Cityname")) {
+            while (rs.next()) {
+                res.add(rs.getString("Cityname"));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return res;
+    }
+
 }
