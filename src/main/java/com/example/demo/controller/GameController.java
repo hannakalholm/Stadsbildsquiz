@@ -18,15 +18,14 @@ public class GameController {
     public String currentCity;
     public int currentLevel;
     public int playerPoints;
-    List<City> answerOptions = new ArrayList<>();
-    List<String> allCities;
-
-
 
 
 
     @Autowired
     private DataRepository dataRepository;
+    List<String> answerOptions;
+    List<String> allCities;
+    List<String> allImages;
 
     @GetMapping("/startview")
     public ModelAndView renderStartView() {
@@ -38,30 +37,29 @@ public class GameController {
 
     @GetMapping("/showview") // i länken som leder till sidan
     public ModelAndView renderGameView() {
-        currentCity = City.randomCity(allCities);
-        System.out.println(currentCity);
-        // currentCity = demoapp.randomCity(allCities);
-        // uppdatera cityList med currentCity och några felaktiga alternativ, ta bort gamla alternativ
-        // currentLevel = 10;
-        answerOptions.add(new City(1, "Stockholm"));
-        answerOptions.add(new City(2, "Paris"));
-        answerOptions.add(new City(3, "London"));
+        currentLevel = 10;
+        currentCity = City.generateRandomCity(allCities);
+        allImages = dataRepository.getAllPictures(currentCity);
+        answerOptions = City.generateAnswerOptions(currentCity, allCities);
+
         return new ModelAndView("gameview") // gameview.html
-                .addObject("pictureurl", dataRepository.getAllPictures())
+                .addObject("pictureurl", allImages.get(0))
                 .addObject("cityList", answerOptions);
     }
 
-    @GetMapping("/option/{id}")
-    public ModelAndView clickListener(@PathVariable int id) {
-        if (id == -1) { // jag vill svara på en lägre poängnivå
-            // uppdatera currentLevel, men ej om currentLevel == 2
-            return new ModelAndView("endofgame");
-        }
-        else if (id == 1) { // korrekt gissning
-            // uppdatera playerPoints
+    @GetMapping("/option/{name}")
+    public ModelAndView clickListener(@PathVariable String name) {
+        if (name.equals("vetej") && currentLevel != 2) { // jag vill svara på en lägre poängnivå
+            currentLevel -= 2;
+            return new ModelAndView("gameview")
+                    .addObject("pictureurl", allImages.get(5 - (currentLevel / 2))) // nästa url i listan från getAllPictures
+                    .addObject("cityList", answerOptions);
+
+        } else if (name.equals(currentCity)) { // korrekt gissning
+            // TODO: uppdatera playerPoints
             return new ModelAndView("correctanswer");
-        }
-        else { // felaktig gissning
+
+        } else { // felaktig gissning
             return new ModelAndView("wronganswer");
         }
 

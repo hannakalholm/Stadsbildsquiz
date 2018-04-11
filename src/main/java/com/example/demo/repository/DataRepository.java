@@ -20,19 +20,19 @@ public class DataRepository {
     @Autowired
     private DataSource dataSource;
 
-    public String getAllPictures() {
-        String myString = "";
+    public List<String> getAllPictures(String city) {
+        List<String> allPictures = new ArrayList<>();
         try (Connection conn = dataSource.getConnection();
              Statement stmt = conn.createStatement();
-             ResultSet rs = stmt.executeQuery("SELECT URL FROM dbo.Picture WHERE PictureID = 1")) {
+             ResultSet rs = stmt.executeQuery("SELECT URL FROM dbo.Picture WHERE City_name = '" + city + "' ORDER BY Points DESC")) {
             while (rs.next()) {
-                myString = rs.getString("URL");
+                allPictures.add(rs.getString("URL"));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(myString);
-        return myString;
+        System.out.println(allPictures);
+        return allPictures;
 
     }
 
