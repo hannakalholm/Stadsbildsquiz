@@ -42,14 +42,13 @@ public class City {
         Random rand = new Random();
         int x = rand.nextInt(3);
         for (int i = 0; i < 3; i++) {
-            answerOptions.add("");
             if (i == x) {
-                answerOptions.set(x, city);
+                answerOptions.add(x, city);
             }
             else if (i != x) {
                 String s = generateRandomAnswerOptionCity(cities);
                 if (!answerOptions.contains(s) && !s.equals(city)) {
-                    answerOptions.set(i, s);
+                    answerOptions.add(i, s);
                 }
                 else {
                     i--;

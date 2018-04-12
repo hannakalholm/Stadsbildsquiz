@@ -6,8 +6,20 @@
     <title>Vart är vi på väg?</title>
 </head>
 <body>
-<p>Spelet är slut</p>
-<a href="/">Gå till spelets startsida</a>
+
+<div id="content">
+    <div id="header">
+        <h1>Spelet är slut</h1>
+    </div>
+    <div th:text="${playerPoints}"></div>
+
+    <!-- <div id="pictureframe">
+        <img id="picture"
+             src="https://beamingnotes.com/wp-content/uploads/2016/10/fear-despair-ron1.jpg"/>
+    </div> -->
+    <a href="/startview">Gå till spelets startsida</a>
+
+</div>
 
 </body>
 </html>

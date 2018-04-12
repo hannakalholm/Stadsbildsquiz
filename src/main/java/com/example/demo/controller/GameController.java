@@ -47,9 +47,12 @@ public class GameController {
     @GetMapping("/showview") // i länken som leder till sidan
     public ModelAndView renderGameView() {
         if (numberOfCitiesVisited == totalCitiesToVisit) {
+            String playerPointsText = "Ditt resultat är: " + playerPoints;
             numberOfCitiesVisited = 0;
+            playerPoints = 0;
             visitedCities.clear();
-            return new ModelAndView("endofgame");
+            return new ModelAndView("endofgame")
+                    .addObject("playerPoints", playerPointsText);
         }
         numberOfCitiesVisited++;
         currentPointLevel = 10;
@@ -59,13 +62,14 @@ public class GameController {
         answerOptions = City.generateAnswerOptions(currentCity, allCities);
         String gameProgressText = "Du besöker stad " + numberOfCitiesVisited + " av " + totalCitiesToVisit;
         String picturePointLevelText = "Den här bilden är värd " + currentPointLevel + " poäng";
+        String playerPointsText = "Din aktuella poängställning är: " + playerPoints;
 
         return new ModelAndView("gameview") // gameview.html
                 .addObject("pictureurl", allImages.get(0))
                 .addObject("cityList", answerOptions)
                 .addObject("gameProgress", gameProgressText)
-                .addObject("picturePointLevel", picturePointLevelText);
-               // .addObject("playerPoints", playerPoints);
+                .addObject("picturePointLevel", picturePointLevelText)
+                .addObject("playerPoints", playerPointsText);
     }
 
     @GetMapping("/option/{name}")
@@ -74,34 +78,25 @@ public class GameController {
             currentPointLevel -= 2;
             String gameProgressText = "Du besöker stad " + numberOfCitiesVisited + " av " + totalCitiesToVisit;
             String picturePointLevelText = "Den här bilden är värd " + currentPointLevel + " poäng";
+            String playerPointsText = "Din aktuella poängställning är: " + playerPoints;
             return new ModelAndView("gameview")
                     .addObject("pictureurl", allImages.get(5 - (currentPointLevel / 2))) // nästa url i listan från getAllPictures
                     .addObject("cityList", answerOptions)
                     .addObject("gameProgress", gameProgressText)
-                    .addObject("picturePointLevel", picturePointLevelText);
+                    .addObject("picturePointLevel", picturePointLevelText)
+                    .addObject("playerPoints", playerPointsText);
 
         } else if (name.equals(currentCity)) { // korrekt gissning
-            // TODO: uppdatera playerPoints
-            return new ModelAndView("correctanswer");
+            playerPoints = playerPoints + currentPointLevel;
+            String playerPointsText = "Din aktuella poängställning är nu: " + playerPoints;
+            return new ModelAndView("correctanswer")
+                    .addObject("playerPoints", playerPointsText);
 
         } else { // felaktig gissning
-            return new ModelAndView("wronganswer");
+            String playerPointsText = "Din aktuella poängställning är nu: " + playerPoints;
+            return new ModelAndView("wronganswer")
+                    .addObject("playerPoints", playerPointsText);
         }
 
-    }
-
-    @GetMapping("/correctanswer") // i länken som leder till sidan
-    public ModelAndView correctAnswer() {
-        return new ModelAndView("correctanswer"); // correctanswer.html
-    }
-
-    @GetMapping("/wronganswer") // i länken som leder till sidan
-    public ModelAndView wrongAnswer() {
-        return new ModelAndView("wronganswer"); // wronganswer.html
-    }
-
-    @GetMapping("/endofgame") // i länken som leder till sidan
-    public ModelAndView endOfGame() {
-        return new ModelAndView("endofgame"); // endofgame.html
     }
 }

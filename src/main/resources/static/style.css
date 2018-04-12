@@ -22,14 +22,30 @@ h1 {
     /* text-align: center;
     color: #2E4A2F; */
     font-family: 'Slabo 27px', serif;
+    font-size: 40px;
+}
+div > * {
+    font-family: 'Slabo 27px', serif;
+    font-size: 20px;
 }
 
 ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     list-style-type: none;
+}
+li {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
 }
 
 
 a {
+    display: flex;
+    justify-content: center;
+    align-self: center;
     padding-left: 50px;
     color: var(--color5);
     text-decoration: none;
@@ -91,12 +107,5 @@ img {
     max-height: 450px;
     max-width: 100%;
     margin: auto;
-
-}
-
-#options {
-
-    font-family: 'Cormorant Garamond', serif;
-    font-size:16px;
 
 }
