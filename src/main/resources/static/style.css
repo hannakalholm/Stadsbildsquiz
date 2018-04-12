@@ -1,10 +1,13 @@
+@import url('https://fonts.googleapis.com/css?family=Cormorant+Garamond:600|Slabo+27px');
+
+
 :root {
 
-    --color1: #FDFFA3;
+    --color1: #FDFFA3; /* almost white */
     --color2: #BDE890;
     --color3: #7F7840;
     --color4: #517F41;
-    --color5: #1E2E25;
+    --color5: #1E2E25; /* dark green */
 
 }
 
@@ -23,6 +26,25 @@ h1 {
 
 ul {
     list-style-type: none;
+}
+
+
+a {
+    padding-left: 50px;
+    color: var(--color5);
+    text-decoration: none;
+}
+
+a:before {
+    content: url(train1_small.png);
+}
+
+a:visited {
+    color: var(--color5);
+}
+
+a:active {
+    color: var(--color3);
 }
 
 /*
@@ -47,6 +69,15 @@ img {
     padding: 10px;
 }
 
+#textbox {
+
+    padding-top: 85px;
+    padding-bottom: 85px;
+    max-width: 60%;
+    margin: auto;
+
+}
+
 #pictureframe {
 
     width: 90%;
@@ -57,7 +88,8 @@ img {
 #picture {
 
     padding-top: 25px;
-    max-height: 500px;
+    max-height: 450px;
+    max-width: 100%;
     margin: auto;
 
 }

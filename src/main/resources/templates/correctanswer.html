@@ -1,13 +1,30 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+
+    <link rel="stylesheet" href="/style.css"/>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Vart är vi på väg?</title>
 </head>
 <body>
 
 <p>Rätt svar!</p>
 <a href="/showview">Fortsätt</a>
+<div id="content">
+    <div id="header">
+        <h1>Rätt svar!!!</h1>
+    </div>
 
+    <!-- <img width="600" th:src="${pictureurl}"></img> -->
+
+    <div id="pictureframe">
+        <img id="picture"
+             src="https://www.daytonahilton.com/resourcefiles/blogsmallimages/nye-celebration-1024x682-359794.jpg"/>
+    </div>
+
+
+    <a href="/showview">Fortsätt spela</a>
+
+</div>
 </body>
 </html>
