@@ -12,9 +12,9 @@
 
 <div id="content">
     <div id="header">
-        <h1>Rätt svar!!!</h1>
+        <h1>Rätt svar!</h1>
     </div>
-    <div th:text="${playerPoints}"></div>
+    <div><p th:text="${playerPoints}"></p></div>
 
     <!-- <img width="600" th:src="${pictureurl}"></img> -->
 
@@ -24,8 +24,9 @@
     </div>
 
 
-    <a href="/showview">Fortsätt</a>
-    <a href="/exitgame" th:text="${exitGame}"></a>
+
+    <a class="arrow" href="/exitgame" th:text="${exitGame}"></a>
+    <a class="arrow" href="/showview">Fortsätt</a>
 
 </div>
 </body>

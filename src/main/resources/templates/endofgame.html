@@ -8,16 +8,17 @@
 <body>
 
 <div id="content">
-    <div id="header">
-        <h1>Spelet är slut</h1>
-    </div>
-    <div th:text="${playerPoints}"></div>
 
-    <!-- <div id="pictureframe">
+    <div id="header">
+        <h1>Det var (tyvärr) sista resmålet för denna gång..</h1>
+    </div>
+    <div><p th:text="${playerPoints}"></p></div>
+
+    <div id="pictureframe">
         <img id="picture"
-             src="https://beamingnotes.com/wp-content/uploads/2016/10/fear-despair-ron1.jpg"/>
-    </div> -->
-    <a href="/startview">Gå till spelets startsida</a>
+             src="http://www.bohusräddningstjänstförbund.se/images/18.2036a7d6140eabb4d3a5f9/1378720548846/pa_resa.jpg"/>
+    </div>
+    <a class="arrow" href="/startview">Gå till spelets startsida</a>
 
 </div>
 

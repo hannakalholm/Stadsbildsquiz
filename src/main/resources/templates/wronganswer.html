@@ -10,14 +10,16 @@
     <div id="header">
         <h1>Fel svar!</h1>
     </div>
-    <div th:text="${playerPoints}"></div>
+    <div><p th:text="${playerPoints}"></p></div>
 
     <div id="pictureframe">
         <img id="picture"
              src="https://beamingnotes.com/wp-content/uploads/2016/10/fear-despair-ron1.jpg"/>
     </div>
-    <a href="/showview">Fortsätt</a>
-    <a href="/exitgame" th:text="${exitGame}"></a>
+
+    <a class="arrow" href="/exitgame" th:text="${exitGame}"></a>
+
+    <a class="arrow" href="/showview">Fortsätt</a>
 
 </div>
 </body>
