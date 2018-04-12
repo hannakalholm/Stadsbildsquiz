@@ -73,7 +73,7 @@ public class GameController {
                 .addObject("gameProgress", gameProgressText)
                 .addObject("picturePointLevel", picturePointLevelText)
                 .addObject("playerPoints", playerPointsText)
-                .addObject("exitGame", "Avbryt");
+                .addObject("exitGame", "Hem");
     }
 
     @GetMapping("/option/{name}")
@@ -89,20 +89,20 @@ public class GameController {
                     .addObject("gameProgress", gameProgressText)
                     .addObject("picturePointLevel", picturePointLevelText)
                     .addObject("playerPoints", playerPointsText)
-                    .addObject("exitGame", "Avbryt");
+                    .addObject("exitGame", "Hem");
 
         } else if (name.equals(currentCity)) { // korrekt gissning
             playerPoints = playerPoints + currentPointLevel;
             String playerPointsText = "Din aktuella poängställning är nu: " + playerPoints;
             return new ModelAndView("correctanswer")
                     .addObject("playerPoints", playerPointsText)
-                    .addObject("exitGame", "Avbryt");
+                    .addObject("exitGame", "Hem");
 
         } else { // felaktig gissning
             String playerPointsText = "Din aktuella poängställning är nu: " + playerPoints;
             return new ModelAndView("wronganswer")
                     .addObject("playerPoints", playerPointsText)
-                    .addObject("exitGame", "Avbryt");
+                    .addObject("exitGame", "Hem");
         }
 
     }
