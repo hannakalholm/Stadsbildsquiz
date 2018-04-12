@@ -34,7 +34,7 @@ public class City {
             }
             else if (i != x) {
                 String s = generateRandomCity(cities);
-                if (!answerOptions.contains(s)) {
+                if (!answerOptions.contains(s) && !s.equals(city)) {
                     answerOptions.set(i, s);
                 }
                 else {

@@ -39,6 +39,7 @@ public class GameController {
     public ModelAndView renderGameView() {
         currentLevel = 10;
         currentCity = City.generateRandomCity(allCities);
+        System.out.println(currentCity);
         allImages = dataRepository.getAllPictures(currentCity);
         answerOptions = City.generateAnswerOptions(currentCity, allCities);
 
