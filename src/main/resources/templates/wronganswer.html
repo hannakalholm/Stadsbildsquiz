@@ -1,12 +1,26 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
+    <link rel="stylesheet" href="/style.css"/>
     <meta charset="UTF-8"/>
-    <title>Title</title>
+    <title>Vart är vi på väg?</title>
 </head>
 <body>
-<p>Fel svar</p>
-<a href="/showview">Fortsätt spela</a>
+<div id="content">
+    <div id="header">
+        <h1>Fel svar!</h1>
+    </div>
 
+    <!-- <img width="600" th:src="${pictureurl}"></img> -->
+
+    <div id="pictureframe">
+        <img id="picture"
+             src="https://beamingnotes.com/wp-content/uploads/2016/10/fear-despair-ron1.jpg"/>
+    </div>
+
+
+    <a href="/showview">Fortsätt spela</a>
+
+</div>
 </body>
 </html>
