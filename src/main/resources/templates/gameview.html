@@ -16,19 +16,21 @@
 
     <!-- <img width="600" th:src="${pictureurl}"></img> -->
 
-    <div th:text="${gameProgress}"></div>
-    <div th:text="${picturePointLevel}"></div>
-    <div th:text="${playerPoints}"></div>
+    <div><p th:text="${gameProgress}"></p></div>
+    <div><p th:text="${playerPoints}"></p></div>
+    <div><p th:text="${picturePointLevel}"></p></div>
     <div id="pictureframe">
         <img id="picture" th:src="${pictureurl}"/>
     </div>
 
     <ul>
-        <li th:each="city : ${cityList}">
+        <li class="answeroption" th:each="city : ${cityList}">
             <a th:href="@{/option/{name}(name=${city})}" th:text="${city}" />
         </li>
-        <li><a href="/option/vetej">Jag vill svara på en lägre poängnivå!</a></li>
     </ul>
+
+    <a class="arrow" href="/option/vetej">Jag vill svara på en lägre poängnivå!</a>
+
 
 
 
