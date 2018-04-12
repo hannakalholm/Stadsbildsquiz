@@ -19,6 +19,7 @@
     <div th:text="${gameProgress}"></div>
     <div th:text="${picturePointLevel}"></div>
     <div th:text="${playerPoints}"></div>
+
     <div id="pictureframe">
         <img id="picture" th:src="${pictureurl}"/>
     </div>
@@ -29,9 +30,7 @@
         </li>
         <li><a href="/option/vetej">Jag vill svara på en lägre poängnivå!</a></li>
     </ul>
-
-
-
+    <a href="/exitgame" th:text="${exitGame}"></a>
 
 </div>
 

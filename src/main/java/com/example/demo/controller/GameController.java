@@ -20,6 +20,7 @@ public class GameController {
     public int playerPoints = 0;
     public int numberOfCitiesVisited = 0;
     public int totalCitiesToVisit = 3;
+    public boolean playerClickedExitGame = false;
 
     List<String> answerOptions;
     List<String> allCities = new ArrayList<>();
@@ -27,13 +28,8 @@ public class GameController {
     List<String> visitedCities = new ArrayList<>();
 
 
-
-
     @Autowired // gäller bara en rad
     private DataRepository dataRepository;
-
-
-
 
 
     @GetMapping("/startview")
@@ -44,8 +40,15 @@ public class GameController {
                 .addObject("startbutton", "Play game");
     }
 
+    // nollställ poäng, numberOfCitiesVisited om användaren har klickat avbryt
     @GetMapping("/showview") // i länken som leder till sidan
     public ModelAndView renderGameView() {
+        if (playerClickedExitGame) {
+            numberOfCitiesVisited = 0;
+            playerPoints = 0;
+            visitedCities.clear();
+            playerClickedExitGame = false;
+        }
         if (numberOfCitiesVisited == totalCitiesToVisit) {
             String playerPointsText = "Ditt resultat är: " + playerPoints;
             numberOfCitiesVisited = 0;
@@ -69,7 +72,8 @@ public class GameController {
                 .addObject("cityList", answerOptions)
                 .addObject("gameProgress", gameProgressText)
                 .addObject("picturePointLevel", picturePointLevelText)
-                .addObject("playerPoints", playerPointsText);
+                .addObject("playerPoints", playerPointsText)
+                .addObject("exitGame", "Avbryt");
     }
 
     @GetMapping("/option/{name}")
@@ -84,19 +88,29 @@ public class GameController {
                     .addObject("cityList", answerOptions)
                     .addObject("gameProgress", gameProgressText)
                     .addObject("picturePointLevel", picturePointLevelText)
-                    .addObject("playerPoints", playerPointsText);
+                    .addObject("playerPoints", playerPointsText)
+                    .addObject("exitGame", "Avbryt");
 
         } else if (name.equals(currentCity)) { // korrekt gissning
             playerPoints = playerPoints + currentPointLevel;
             String playerPointsText = "Din aktuella poängställning är nu: " + playerPoints;
             return new ModelAndView("correctanswer")
-                    .addObject("playerPoints", playerPointsText);
+                    .addObject("playerPoints", playerPointsText)
+                    .addObject("exitGame", "Avbryt");
 
         } else { // felaktig gissning
             String playerPointsText = "Din aktuella poängställning är nu: " + playerPoints;
             return new ModelAndView("wronganswer")
-                    .addObject("playerPoints", playerPointsText);
+                    .addObject("playerPoints", playerPointsText)
+                    .addObject("exitGame", "Avbryt");
         }
 
+    }
+
+    @GetMapping("/exitgame")
+    public ModelAndView playerClickedExitGame() {
+        playerClickedExitGame = true;
+        return new ModelAndView("startview") // startview.html
+                .addObject("startbutton", "Play game");
     }
 }
