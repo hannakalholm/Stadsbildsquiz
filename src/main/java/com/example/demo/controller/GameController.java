@@ -16,16 +16,25 @@ import java.util.List;
 @Controller
 public class GameController {
     public String currentCity;
-    public int currentLevel;
-    public int playerPoints;
+    public int currentPointLevel;
+    public int playerPoints = 0;
+    public int numberOfCitiesVisited = 0;
+    public int totalCitiesToVisit = 3;
 
-
-
-    @Autowired
-    private DataRepository dataRepository;
     List<String> answerOptions;
-    List<String> allCities;
+    List<String> allCities = new ArrayList<>();
     List<String> allImages;
+    List<String> visitedCities = new ArrayList<>();
+
+
+
+
+    @Autowired // gäller bara en rad
+    private DataRepository dataRepository;
+
+
+
+
 
     @GetMapping("/startview")
     public ModelAndView renderStartView() {
@@ -37,24 +46,39 @@ public class GameController {
 
     @GetMapping("/showview") // i länken som leder till sidan
     public ModelAndView renderGameView() {
-        currentLevel = 10;
-        currentCity = City.generateRandomCity(allCities);
+        if (numberOfCitiesVisited == totalCitiesToVisit) {
+            numberOfCitiesVisited = 0;
+            visitedCities.clear();
+            return new ModelAndView("endofgame");
+        }
+        numberOfCitiesVisited++;
+        currentPointLevel = 10;
+        currentCity = City.generateRandomCity(allCities, visitedCities);
         System.out.println(currentCity);
         allImages = dataRepository.getAllPictures(currentCity);
         answerOptions = City.generateAnswerOptions(currentCity, allCities);
+        String gameProgressText = "Du besöker stad " + numberOfCitiesVisited + " av " + totalCitiesToVisit;
+        String picturePointLevelText = "Den här bilden är värd " + currentPointLevel + " poäng";
 
         return new ModelAndView("gameview") // gameview.html
                 .addObject("pictureurl", allImages.get(0))
-                .addObject("cityList", answerOptions);
+                .addObject("cityList", answerOptions)
+                .addObject("gameProgress", gameProgressText)
+                .addObject("picturePointLevel", picturePointLevelText);
+               // .addObject("playerPoints", playerPoints);
     }
 
     @GetMapping("/option/{name}")
     public ModelAndView clickListener(@PathVariable String name) {
-        if (name.equals("vetej") && currentLevel != 2) { // jag vill svara på en lägre poängnivå
-            currentLevel -= 2;
+        if (name.equals("vetej") && currentPointLevel != 2) { // jag vill svara på en lägre poängnivå
+            currentPointLevel -= 2;
+            String gameProgressText = "Du besöker stad " + numberOfCitiesVisited + " av " + totalCitiesToVisit;
+            String picturePointLevelText = "Den här bilden är värd " + currentPointLevel + " poäng";
             return new ModelAndView("gameview")
-                    .addObject("pictureurl", allImages.get(5 - (currentLevel / 2))) // nästa url i listan från getAllPictures
-                    .addObject("cityList", answerOptions);
+                    .addObject("pictureurl", allImages.get(5 - (currentPointLevel / 2))) // nästa url i listan från getAllPictures
+                    .addObject("cityList", answerOptions)
+                    .addObject("gameProgress", gameProgressText)
+                    .addObject("picturePointLevel", picturePointLevelText);
 
         } else if (name.equals(currentCity)) { // korrekt gissning
             // TODO: uppdatera playerPoints
