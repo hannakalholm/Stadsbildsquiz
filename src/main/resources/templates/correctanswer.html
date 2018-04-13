@@ -9,9 +9,16 @@
 <body>
 
 
-
 <div id="content">
+
     <div id="header">
+        <a href="/exitgame">
+            <div id="logo">
+                <img src="/logo_small.png"/>
+                <br/>
+                HEM
+            </div>
+        </a>
         <h1>Rätt svar!</h1>
     </div>
     <div><p th:text="${playerPoints}"></p></div>
@@ -24,7 +31,6 @@
     </div>
 
     <a class="arrow" href="/showview">Fortsätt</a>
-    <a class="arrow" href="/exitgame" th:text="${exitGame}"></a>
 
 
 </div>

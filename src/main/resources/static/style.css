@@ -128,3 +128,13 @@ img {
     padding-bottom: 1%;
     transform: translate(0, -7px);
 }
+
+#logo {
+
+    position: absolute;
+    left: 11%;
+    top: 2%;
+    font-family: 'Slabo 27px', serif;
+    font-size: 16px;
+
+}
