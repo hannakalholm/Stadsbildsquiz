@@ -4,12 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
@@ -31,9 +27,7 @@ public class DataRepository {
         } catch (Exception e) {
             e.printStackTrace();
         }
-        System.out.println(allPictures);
         return allPictures;
-
     }
 
     public List<String> getAllCities() {
@@ -49,5 +43,4 @@ public class DataRepository {
         }
         return res;
     }
-
 }
