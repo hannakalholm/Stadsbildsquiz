@@ -19,7 +19,7 @@ public class GameController {
     public int currentPointLevel;
     public int playerPoints = 0;
     public int numberOfCitiesVisited = 0;
-    public int totalCitiesToVisit = 3;
+    public int totalCitiesToVisit = 10;
     public boolean playerClickedExitGame = false;
 
     List<String> answerOptions;
